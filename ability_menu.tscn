@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkak7x7egwsx2"]
+
+[ext_resource type="Texture2D" uid="uid://b2xb1qw41v533" path="res://Assets/accelerator.png" id="1_m7uxj"]
+[ext_resource type="Script" path="res://accelerator.gd" id="2_6jf4w"]
+[ext_resource type="Texture2D" uid="uid://b8gfgqnenvsj0" path="res://Assets/bullet.png" id="3_jqgkc"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(63, 39)
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_right = 654.0
+offset_bottom = 849.0
+scale = Vector2(0.1, 0.1)
+theme_override_constants/h_separation = 200
+columns = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="accelerator" type="TextureButton" parent="GridContainer/CenterContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_m7uxj")
+script = ExtResource("2_6jf4w")
+
+[node name="CenterContainer2" type="CenterContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="laser" type="TextureButton" parent="GridContainer/CenterContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("3_jqgkc")

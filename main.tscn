@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://ci40ldowmy0rg"]
+
+[ext_resource type="PackedScene" uid="uid://c10vixjjox7ak" path="res://wall.tscn" id="1_p30qp"]
+[ext_resource type="Script" path="res://main.gd" id="1_xkb2x"]
+[ext_resource type="PackedScene" uid="uid://d4klap3rr5ewu" path="res://roof.tscn" id="2_pl2wb"]
+[ext_resource type="PackedScene" uid="uid://eklooccxb4gs" path="res://ball.tscn" id="4_wc11c"]
+[ext_resource type="PackedScene" uid="uid://dhepqlfgaey4q" path="res://hud.tscn" id="6_r4ejd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7aa6u"]
+size = Vector2(1280.5, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ft2qh"]
+size = Vector2(1279, 8)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_xkb2x")
+
+[node name="wall-left" parent="." instance=ExtResource("1_p30qp")]
+
+[node name="wall-right" parent="." instance=ExtResource("1_p30qp")]
+position = Vector2(1289, 1)
+
+[node name="roof" parent="." instance=ExtResource("2_pl2wb")]
+
+[node name="ball" parent="." instance=ExtResource("4_wc11c")]
+position = Vector2(640, 516)
+
+[node name="score" type="Label" parent="."]
+offset_left = 15.0
+offset_top = 9.0
+offset_right = 217.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 25
+text = "Score: 0"
+uppercase = true
+
+[node name="HUD" parent="." instance=ExtResource("6_r4ejd")]
+
+[node name="StartPositionball" type="Marker2D" parent="."]
+position = Vector2(640, 516)
+
+[node name="StartPositionPlayer" type="Marker2D" parent="."]
+position = Vector2(640, 548)
+
+[node name="play-bound" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="play-bound"]
+position = Vector2(640, 486)
+shape = SubResource("RectangleShape2D_7aa6u")
+
+[node name="play-bound-low" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="play-bound-low"]
+position = Vector2(639.5, 653)
+shape = SubResource("RectangleShape2D_ft2qh")
+
+[connection signal="start_game" from="." to="ball" method="_on_node_2d_start_game"]
+[connection signal="win" from="." to="." method="_on_win"]
+[connection signal="game_over" from="ball" to="." method="_on_ball_game_over"]
+[connection signal="start_countdown" from="HUD" to="." method="_on_hud_start_countdown"]

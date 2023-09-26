@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://eklooccxb4gs"]
+
+[ext_resource type="Texture2D" uid="uid://bfua27b87eisq" path="res://Assets/ball.png" id="1_7soh5"]
+[ext_resource type="Script" path="res://ball.gd" id="1_pyegv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yo41e"]
+radius = 15.0
+
+[node name="RigidBody2D" type="RigidBody2D"]
+position = Vector2(651, 492)
+collision_layer = 3
+collision_mask = 3
+gravity_scale = 0.0
+script = ExtResource("1_pyegv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7.45058e-09, -7.45058e-09)
+scale = Vector2(0.103242, 0.103242)
+texture = ExtResource("1_7soh5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yo41e")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

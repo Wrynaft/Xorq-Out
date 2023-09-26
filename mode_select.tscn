@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwoyugslgvswx"]
+
+[ext_resource type="Texture2D" uid="uid://cw8bwsqo8xean" path="res://Assets/wip-button.png" id="1_gt7dr"]
+[ext_resource type="Texture2D" uid="uid://dyjpt30ulquta" path="res://Assets/standard.png" id="2_xul2p"]
+[ext_resource type="Texture2D" uid="uid://caw5eu8i635bo" path="res://Assets/standard-pressed.png" id="3_65pmw"]
+
+[node name="ModeSelect" type="CanvasLayer"]
+
+[node name="Timer" type="TextureButton" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.0
+offset_top = 126.0
+offset_right = 552.0
+offset_bottom = 979.0
+grow_horizontal = 2
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("1_gt7dr")
+
+[node name="Standard" type="TextureButton" parent="."]
+offset_left = 130.0
+offset_top = 126.0
+offset_right = 786.0
+offset_bottom = 979.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("2_xul2p")
+texture_pressed = ExtResource("3_65pmw")
+texture_hover = ExtResource("3_65pmw")
+stretch_mode = 0
+
+[node name="Boss" type="TextureButton" parent="."]
+offset_left = 932.0
+offset_top = 126.0
+offset_right = 1588.0
+offset_bottom = 979.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("1_gt7dr")

@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://dsriu7ctngy4y"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_vpnh7"]
+[ext_resource type="Script" path="res://player_char.gd" id="2_jsn3p"]
+[ext_resource type="Texture2D" uid="uid://cv0mq8yf3jxmv" path="res://Assets/player.png" id="2_xuwlf"]
+[ext_resource type="Script" path="res://Sprint.gd" id="4_ruroi"]
+[ext_resource type="Texture2D" uid="uid://c6equwle0yp7n" path="res://Assets/progress.png" id="5_4b870"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e71tp"]
+size = Vector2(114, 19)
+
+[sub_resource type="Gradient" id="Gradient_g4wgm"]
+colors = PackedColorArray(1, 1, 1, 0.698039, 1, 1, 1, 0.0823529)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_iv6yf"]
+gradient = SubResource("Gradient_g4wgm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wd73f"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.1
+scale_max = 0.1
+color_ramp = SubResource("GradientTexture1D_iv6yf")
+
+[node name="player" type="Node2D"]
+script = ExtResource("1_vpnh7")
+
+[node name="player_char" type="CharacterBody2D" parent="."]
+position = Vector2(640, 550)
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("2_jsn3p")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="player_char"]
+position = Vector2(-7.62939e-06, 0)
+scale = Vector2(0.0961214, 0.124172)
+texture = ExtResource("2_xuwlf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_char"]
+position = Vector2(-7.62939e-06, 0)
+shape = SubResource("RectangleShape2D_e71tp")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="player_char"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_wd73f")
+texture = ExtResource("2_xuwlf")
+
+[node name="SprintTimer" type="Timer" parent="player_char"]
+wait_time = 0.3
+
+[node name="SprintCD" type="Node2D" parent="."]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("4_ruroi")
+
+[node name="SprintCDBar" type="TextureProgressBar" parent="SprintCD"]
+offset_left = 720.0
+offset_top = 3920.0
+offset_right = 1263.0
+offset_bottom = 4462.0
+max_value = 3.0
+step = 0.0
+value = 3.0
+fill_mode = 4
+texture_progress = ExtResource("5_4b870")
+
+[node name="SprintCDTimer" type="Timer" parent="SprintCD"]
+wait_time = 3.0
+
+[connection signal="timeout" from="player_char/SprintTimer" to="player_char" method="_on_sprint_timer_timeout"]
+[connection signal="timeout" from="SprintCD/SprintCDTimer" to="player_char" method="_on_sprint_cd_timer_timeout"]
